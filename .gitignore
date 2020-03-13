@@ -1,0 +1,5 @@
+.vscode
+venv
+/media
+*.png
+*.jpg
