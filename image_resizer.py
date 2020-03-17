@@ -2,37 +2,47 @@
 import os
 import sys
 import getopt
+import tkinter
 from pathlib import Path
 
 from PIL import Image
+
+root = tkinter.Tk() # Used for default resolution
 
 # Set Defaults
 USE_SUBDIRECTORIES = True
 INPUT_EXTENSION = ".png"
 OUTPUT_EXTENSION = ".jpg"
-WIDTH = 1280
-HEIGHT = 720
+WIDTH = int(root.winfo_screenwidth()/2)
+HEIGHT = int(root.winfo_screenheight()/2)
 myDir = os.getcwd()
 sysargs = sys.argv[1:]
 
 try:
-    opts, args = getopt.getopt(sysargs, "ni:o:w:h:t:", ["inputextension=", "outputextension", "width=", "height=", "toplevel="])
+    opts, args = getopt.getopt(sysargs, "?ni:o:w:h:t:", ["help", "inputextension=", "outputextension", "width=", "height=", "toplevel="])
 except getopt.GetoptError:
-    print("Usage: image_resizer.py -n -i inputextension -o outputextension -w width -h height -t toplevel_directory")
+    print("Usage: image_resizer.py -n -i inputextension -o outputextension -w width -h height -t 'toplevel_directory'")
+    print("Use -? or --help for the help menu.")
     sys.exit(2)
 
 for opt, arg in opts:
-    if opt == '-n':
+    if opt in ('-?', '--help'):
+        print("Usage: image_resizer.py -n -i inputextension -o outputextension -w width -h height -t 'toplevel_directory'")
+        print("-n: Do not place resized images in width x height subfolders")
+        print("-i, -o: Image type file extensions ie .jpg, .png, .bmp")
+        print("-w, -h: Pixel dimensions for the resized file. Default is half of primary monitor resolution.")
+        print("-t: Use quotation marks when specifying the directory. All images in this directory and EVERY subdirectory will be checked for resizing.")
+    elif opt == '-n':
         USE_SUBDIRECTORIES = False
-    if opt in ("-i", "--inputextension"):
+    elif opt in ("-i", "--inputextension"):
         INPUT_EXTENSION = str(arg)
-    if opt in ("-o", "--outputextension"):
+    elif opt in ("-o", "--outputextension"):
         OUTPUT_EXTENSION = str(arg)
-    if opt in ("-w", "--width"):
+    elif opt in ("-w", "--width"):
         WIDTH = int(arg)
-    if opt in ("-h", "--height"):
+    elif opt in ("-h", "--height"):
         HEIGHT = int(arg)
-    if opt in ("-t", "--toplevel"): # TODO: Fix spaces in filepaths breaking stuff
+    elif opt in ("-t", "--toplevel"):
         myDir = arg
 
 
