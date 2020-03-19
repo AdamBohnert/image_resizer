@@ -21,17 +21,17 @@ sysargs = sys.argv[1:]
 try:
     opts, args = getopt.getopt(sysargs, "?ni:o:w:h:t:", ["help", "inputextension=", "outputextension", "width=", "height=", "toplevel="])
 except getopt.GetoptError:
-    print("Usage: image_resizer.py -n -i inputextension -o outputextension -w width -h height -t 'toplevel_directory'")
+    print("Usage: image_resizer.py -n -i inputextension -o outputextension -w width -h height -t 'top_directory'")
     print("Use -? or --help for the help menu.")
     sys.exit(2)
 
 for opt, arg in opts:
     if opt in ('-?', '--help'):
-        print("Usage: image_resizer.py -n -i inputextension -o outputextension -w width -h height -t 'toplevel_directory'")
+        print("Usage: image_resizer.py -n -i inputextension -o outputextension -w width -h height -t 'top_directory'")
         print("-n: Do not place resized images in width x height subfolders")
-        print("-i, -o: Image type file extensions ie .jpg, .png, .bmp")
+        print("-i, -o: Specify image type file extensions ie .jpg, .png, .bmp")
         print("-w, -h: Pixel dimensions for the resized file. Default is half of primary monitor resolution.")
-        print("-t: Use quotation marks when specifying the directory. All images in this directory and EVERY subdirectory will be checked for resizing.")
+        print("-t: Use quotation marks when specifying the directory. All images in this directory and EVERY subdirectory will be targeted for resizing.")
     elif opt == '-n':
         USE_SUBDIRECTORIES = False
     elif opt in ("-i", "--inputextension"):
