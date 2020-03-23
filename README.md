@@ -11,9 +11,10 @@ If no width or height is specified the program will use half of your monitor's r
 
 Ensure the required [Pillow library](https://pypi.org/project/Pillow/) is installed. With the command line, use this format:
 
-'''
-python image_resizer.py -n -i inputextension -o outputextension -w width -h height -t 'top_directory'
-'''
+
+`python image_resizer.py -n -i inputextension -o outputextension -w width -h height -t 'top_directory'`
+
+
 
 **Options**
 
